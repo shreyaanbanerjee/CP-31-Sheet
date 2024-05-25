@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define pii pair<int, int>
+#define pll pair<long long, long long>
+#define vi vector<int>
+#define vll vector<long long>
+#define mii map<int, int>
+#define si set<int>
+#define sc set<char>
+#define pb push_back
+#define fori for(i=0;i<n;i++)
+template <class T>
+void print_v(vector<T> &v) { cout << "{"; for (auto x : v) cout << x << ","; cout << "\b}"; }
+#define MOD 1000000007
+#define PI 3.1415926535897932384626433832795
+#define read(type) readInt<type>()
+ll min(ll a,int b) { if (a<b) return a; return b; }
+ll min(int a,ll b) { if (a<b) return a; return b; }
+ll max(ll a,int b) { if (a>b) return a; return b; }
+ll max(int a,ll b) { if (a>b) return a; return b; }
+ll gcd(ll a,ll b) { if (b==0) return a; return gcd(b, a%b); }
+#define for0(i, n) for (int i = 0; i < (int)(n); ++i)
+#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
+int binexpiter(int a,int b){int ans=1;while(b){if(b&1) ans=(ans*1ll*a)%MOD; a=(a*a*1ll)%MOD; b>>=1;}return ans; }
+ll lcm(ll a,ll b) { return a/gcd(a,b)*b; }
+string to_upper(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='a' && a[i]<='z') a[i]-='a'-'A'; return a; }
+string to_lower(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='A' && a[i]<='Z') a[i]+='a'-'A'; return a; }
+bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a%i==0) return 0; return 1; }
+void yes() { cout<<"YES\n"; }
+void no() { cout<<"NO\n"; }
+typedef long int int32;
+typedef unsigned long int uint32;
+typedef long long int int64;
+typedef unsigned long long int  uint64;
+bool vowel(char ch)
+{
+    if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u')
+    return true;
+    return false;
+}
+vector<int> normalSieve(int n)
+{vi v;
+    bool prime[n / 2]; memset(prime, false, sizeof(prime));for (int i = 3; i * i < n; i += 2) {
+  if (prime[i / 2] == false)
+for (int j = i * i; j < n; j += i * 2)
+ prime[j / 2] = true;
+  }
+   printf("2 ");
+   for (int i = 3; i < n; i += 2)
+   {if (prime[i / 2] == false)
+   v.pb(i);
+}
+return v;
+}
+#define intmax INT_MAX
+void write()
+{
+    int n,a=INT_MIN,b=INT_MAX,i,d=INT_MIN;
+    cin>>n;
+    vi v(n);
+    for0(i,n)
+    {
+        cin>>v[i];
+        a=max(v[i],a);
+        b=min(v[i],b);
+    }
+    // for1(i,n-1)
+    // a=max(v[i],a);
+    // for ( i = 0; i < n-1; i++)
+    // {
+    //    b=min(v[i],b)
+    // }
+    for ( i = 1; i < n; i++)
+    {
+        d=max(d,v[i-1]-v[i]);
+    }
+    d=max(d,v[n-1]-v[0]);
+   if(v[0]==b || v[n-1]==a)
+   cout<<a-b<<endl;
+   else if(v[0]==a && v[n-1]==b)
+   cout<<d<<endl;
+   else if(v[0]==a)
+cout<<max(v[n-1]-b,d)<<endl;
+else if(v[n-1]==b)
+cout<<max(a-v[0],d)<<endl;
+   else
+   {
+    cout<<max(max(a-v[0],v[n-1]-b),d)<<endl;
+   }
+}
+int main()
+{
+    int t;
+     cin>>t;
+     while(t--)
+     {
+        write();
+     }
+     
+    return 0;
+}
+//expected: '909', found: '517'
