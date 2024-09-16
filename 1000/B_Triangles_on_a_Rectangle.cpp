@@ -2,11 +2,13 @@
 using namespace std;
 #define ll long long
 #define pii pair<int, int>
-#define pll pair<long long, long long>
+#define pll pair<ll, ll>
 #define vi vector<int>
-#define vll vector<long long>
+#define vl vector<ll>
+#define vll vector<vl>
 #define mii map<int, int>
 #define si set<int>
+#define sll set<ll,ll>
 #define sc set<char>
 #define pb push_back
 #define all(x) bg(x), end(x)
@@ -133,8 +135,7 @@ vector<int> normalSieve(int n)
     }
     return v;
 }
-#define lo(i,f,t)\
-   for(ll i=f;i<t;i++)
+#define lo(i,f,t) for(ll i=f;i<t;i++)
 ostream& operator<<(ostream& dout, vector<ll>& vec) 
 {
     lo(i, 0, vec.size())
@@ -156,20 +157,24 @@ istream& operator>>(istream& din, vector<ll>& vec)
 #define intmax INT_MAX
 void write()
 {
-    ll n,k,i;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    vll pre(n+1,0);
-    for(i=0;i<n;i++)
+    ll w,h;
+    cin>>w>>h;
+    ll ans=0;
+    lo(i,0,2)
     {
-        pre[i+1]=pre[i]+((s[i]=='B')?1:0);
+        int k;
+        cin>>k;
+        vl v(k);
+        lo(i,0,k) cin>>v[i];
+        ans=max(ans,(v[k-1]-v[0])*h);
     }
-    // cout<<pre;
-    ll ans=intmax;
-    for(i=k;i<=n;i++)
+    lo(i,0,2)
     {
-        ans=min(ans,k-(pre[i]-pre[i-k]));
+        int k;
+        cin>>k;
+        vl v(k);
+        lo(i,0,k) cin>>v[i];
+        ans=max(ans,(v[k-1]-v[0])*w);
     }
     cout<<ans<<endl;
 }

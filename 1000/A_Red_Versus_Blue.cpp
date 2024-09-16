@@ -2,11 +2,13 @@
 using namespace std;
 #define ll long long
 #define pii pair<int, int>
-#define pll pair<long long, long long>
+#define pll pair<ll, ll>
 #define vi vector<int>
-#define vll vector<long long>
+#define vl vector<ll>
+#define vll vector<vl>
 #define mii map<int, int>
 #define si set<int>
+#define sll set<ll,ll>
 #define sc set<char>
 #define pb push_back
 #define all(x) bg(x), end(x)
@@ -133,8 +135,7 @@ vector<int> normalSieve(int n)
     }
     return v;
 }
-#define lo(i,f,t)\
-   for(ll i=f;i<t;i++)
+#define lo(i,f,t) for(ll i=f;i<t;i++)
 ostream& operator<<(ostream& dout, vector<ll>& vec) 
 {
     lo(i, 0, vec.size())
@@ -156,22 +157,21 @@ istream& operator>>(istream& din, vector<ll>& vec)
 #define intmax INT_MAX
 void write()
 {
-    ll n,k,i;
-    cin>>n>>k;
+    ll n,r,b,i;
+    cin>>n>>r>>b;
     string s;
-    cin>>s;
-    vll pre(n+1,0);
-    for(i=0;i<n;i++)
-    {
-        pre[i+1]=pre[i]+((s[i]=='B')?1:0);
-    }
-    // cout<<pre;
-    ll ans=intmax;
-    for(i=k;i<=n;i++)
-    {
-        ans=min(ans,k-(pre[i]-pre[i-k]));
-    }
-    cout<<ans<<endl;
+    lo(i,0,r%(b+1))
+{
+    s.append(ceil(r*1.0/(b+1)),'R');
+    s+='B';
+}
+lo(i,0,b-r%(b+1))
+{
+    s.append(r/(b+1),'R');
+    s+='B';
+}
+s.append(n-s.size(),'R');
+cout<<s<<endl;
 }
 int main()
 {
