@@ -159,34 +159,34 @@ istream& operator>>(istream& din, vector<ll>& vec)
 #define intmax INT_MAX
 void write()
 {
-    ll n,ans=0;
-    cin>>n;
-    vl v(n);
-    cin>>v;
-    // sort(v.begin(),v.end());
-    // cout<<v;
-    vl pre(n+1);
-    for(ll i=1;i<=n;i++) pre[i]=pre[i-1]+v[i-1];
-    // cout<<pre;
-    for(ll i=1;i*i<=n;i++)
+    int n,q;
+    cin>>n>>q;
+    vl a(n);
+    vl x(q);
+    cin>>a;
+    cin>>x;
+    vl b(n);
+    for(ll i=0;i<n;i++)
     {
-        if(n%i) continue;
-        ll maxi=-1e18,mini=1e18;
-        for(ll j=1;j<=n;j+=i)
+        ll t=a[i];
+        while(t%2==0)
         {
-            maxi=max(maxi,pre[j+i-1]-pre[j-1]);
-            mini=min(mini,pre[j+i-1]-pre[j-1]);
+           t/=2;
         }
-        ans=max(ans,maxi-mini);
-        maxi=-1e18,mini=1e18;
-        for(ll j=1;j<=n;j+=n/i)
-        {
-            maxi=max(maxi,pre[j+n/i-1]-pre[j-1]);
-            mini=min(mini,pre[j+n/i-1]-pre[j-1]);
-        }
-        ans=max(ans,maxi-mini);
+        b[i]=log2(a[i]/t);
     }
-    cout<<ans<<endl;
+    sort(x.begin(),x.end());
+vl pre(q+1);
+for(ll i=1;i<=q;i++)
+{
+    pre[i]=pre[i-1]+expo(2,x[i],1e18);
+}
+for(ll i=0;i<n;i++)
+{
+    ll u=upper_bound(x.begin(),x.end(),b[i])-x.begin();
+    a[i]+=pre[u+1]/2;
+}
+cout<<a;
 }
 int main()
 {
